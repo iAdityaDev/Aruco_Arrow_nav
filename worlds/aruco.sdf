@@ -1,0 +1,235 @@
+<sdf version='1.10'>
+  <world name='aruco'>
+    <physics name='1ms' type='ignored'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name='gz::sim::systems::Sensors' filename='gz-sim-sensors-system'>
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 2 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aruco_marker_1'>
+      <static>true</static>
+      <pose>10 19.5 0.47999999999999998 2.5899999999999985 -1.54 -1.2299999999999964</pose>
+      <link name='aruco_marker_1_link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file://ROBOT_ws/src/MR_ROBOT_MAIN2.0/mr_robot_description/meshes/aruco_one.dae</uri>
+            </mesh>
+          </geometry>
+          <script>
+            <uri>file://ROBOT_ws/src/MR_ROBOT_MAIN2.0/mr_robot_description/meshes</uri>
+            <name>4x4_1000-1</name>
+          </script>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>file://ROBOT_ws/src/MR_ROBOT_MAIN2.0/mr_robot_description/meshes/aruco_one.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='aruco_marker_0'>
+      <static>true</static>
+      <pose>8 0 0.47999999999999998 2.4500000000000024 -1.5500000000000174 -2.4500000000000006</pose>
+      <link name='aruco_marker_0_link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file://ROBOT_ws/src/MR_ROBOT_MAIN2.0/mr_robot_description/meshes/aruco_zero.dae</uri>
+            </mesh>
+          </geometry>
+          <script>
+            <uri>file://ROBOT_ws/src/MR_ROBOT_MAIN2.0/mr_robot_description/meshes</uri>
+            <name>4x4_1000-0</name>
+          </script>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>file://ROBOT_ws/src/MR_ROBOT_MAIN2.0/mr_robot_description/meshes/aruco_zero.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='my_marker_with_placard'>
+      <link name='aruco_marker_0'>
+        <visual name='marker_visual'>
+          <geometry>
+            <box>
+              <size>0.20000000000000001 0.20000000000000001 0.20000000000000001</size>
+            </box>
+          </geometry>
+          <script>
+            <uri>file://ROBOT_ws/src/MR_ROBOT_MAIN2.0/mr_robot_description/meshes</uri>
+            <name>4x4_1000-0</name>
+          </script>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <link name='placard'>
+        <visual name='placard_visual'>
+          <geometry>
+            <plane>
+              <size>0.29999999999999999 0.29999999999999999</size>
+              <normal>0 0 1</normal>
+            </plane>
+          </geometry>
+          <script>
+            <uri>file://ROBOT_ws/src/MR_ROBOT_MAIN2.0/mr_robot_description/meshes</uri>
+            <name>4x4_1000-0</name>
+          </script>
+        </visual>
+        <pose>1.5000000000000089 0.49999999999999822 0.48000000044703484 2.450000000000073 -1.5500000000000762 -2.4500000000000717</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='placard_joint' type='fixed'>
+        <parent>aruco_marker_0</parent>
+        <child>placard</child>
+        <pose>-8.3266700000000003e-16 -2.2204499999999999e-16 -2.8865800000000001e-15 -2.6020900000000001e-18 3.0926900000000001e-17 8.6736199999999997e-19</pose>
+      </joint>
+      <pose>-1.0742913418138253e-10 1.4432270019672873e-10 -7752436.8401891794 5.8231988391328345e-12 -1.1192128793524087e-11 -1.0490892138211451e-10</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.0099999997764825821</linear>
+        <constant>0.89999997615814209</constant>
+        <quadratic>0.0010000000474974513</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>

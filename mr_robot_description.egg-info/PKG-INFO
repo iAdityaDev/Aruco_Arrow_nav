@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: mr_robot_description
+Version: 0.0.0
+Summary: The mr_robot_description package
+Maintainer: Aditya Dev SIngh
+Maintainer-email: adityadevsingh16@gmail.com
+License: TODO: License declaration
+License-File: LICENSE
+Requires-Dist: setuptools
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Dynamic: license
+Dynamic: license-file
+Dynamic: maintainer
+Dynamic: maintainer-email
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: summary

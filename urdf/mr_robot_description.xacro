@@ -1,0 +1,255 @@
+<?xml version="1.0" ?>
+<robot name="mr_robot_description" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find mr_robot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find mr_robot_description)/urdf/mr_robot_description.trans" />
+<xacro:include filename="$(find mr_robot_description)/urdf/mr_robot_description.gazebo" />
+
+<!-- it is just the anchor point of the world  -->  
+<!-- for very limk we need a joint  -->
+
+<!-- <origin> in a Joint
+
+visual - how link appears in the sim
+collision - collison geometry for the engineers 
+inertial - mass and interia dynamics properties
+Purpose: Defines the transform from the parent link to the child link.
+Interpretation:
+xyz: Position offset (in meters) from the parent link’s origin.
+rpy: Rotation (roll, pitch, yaw in radians) relative to the parent link.
+
+2. <origin> in a Visual/Collision Tag
+Purpose: Defines the transform from the link’s origin to the visual/collision geometry.
+
+Interpretation:
+xyz: Position offset of the mesh/shape within the link’s frame.
+rpy: Rotation of the mesh/shape within the link’s frame.
+Example Use Case	Mounting a wheel 0.1m from base.	Centering a mesh within a line -->
+
+<link name="base_footprint">
+</link>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.004201988917363847 0.0016044494109548075 0.0847154915126352" rpy="0 0 0"/>
+    <mass value="11.747369099839622"/>
+    <inertia ixx="0.185521" iyy="0.434537" izz="0.601531" ixy="0.000399" iyz="0.000191" ixz="-0.002314"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="Yellow"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="base_link_joint" type="fixed">
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
+<link name="Wheel_r_1">
+  <inertial>
+    <origin xyz="7.587052287765051e-07 -0.023812499999986303 5.494367044764359e-06" rpy="0 0 0"/>
+    <mass value="0.5"/>
+    <inertia ixx="0.002748" iyy="0.005028" izz="0.002748" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 -0.22 -0.0629" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/Wheel_r_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 -0.22 -0.0629" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/Wheel_r_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="right_wheel_joint" type="continuous">
+  <origin xyz="0.0 -0.163275 0.0629" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Wheel_r_1"/>
+  <axis xyz="0.0 1.0 -0.0"/>
+</joint>
+
+<link name="Wheel_l_1">
+  <inertial>
+    <origin xyz="9.233884580835298e-07 0.023812500000002568 5.551215635751783e-06" rpy="0 0 0"/>
+    <mass value="0.5"/>
+    <inertia ixx="0.002748" iyy="0.005028" izz="0.002748" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.22 -0.0629" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/Wheel_l_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.22 -0.0629" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/Wheel_l_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="left_wheel_joint" type="continuous">
+  <origin xyz="0.0 0.171525 0.0629" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="Wheel_l_1"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+</joint>
+
+<link name="gpu_lidar">
+  <inertial>
+    <origin xyz="-0.0017059004296806112 -8.513948580313796e-17 -0.07729885777720902" rpy="0 0 0"/>
+    <mass value="0.2"/>
+    <inertia ixx="0.000489" iyy="0.000861" izz="0.000987" ixy="-0.0" iyz="0.0" ixz="0.000148"/>
+  </inertial>
+  <visual>  
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/lidar_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="blue"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/lidar_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Lidar_joint" type="fixed">
+  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  <child link="gpu_lidar"/>
+  <parent link="base_link"/>
+</joint>
+
+<link name="imu">
+  <inertial>
+    <origin xyz="-4.414696966422364e-05 -1.766569519392051e-05 0.0008825653111830794" rpy="0 0 0"/>
+    <mass value="0.006457505582555322"/>
+    <inertia ixx="0.0" iyy="0.0" izz="1e-06" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/_IMU_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/_IMU_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="imu_joint" type="fixed">
+  <origin xyz="0.0 0.0 0.18" rpy="0 0 0"/>
+  <child link="imu"/>
+  <parent link="base_link"/>
+  <axis xyz="0 0 0" />
+</joint>
+
+<link name="camera">
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <box size="0.05 0.05 0.05"/>
+    </geometry>
+  </collision>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>     <!-- roll pitch and yaw in radians and xyz in meters-->
+    <geometry> 
+      <box size="0.05 0.05 0.05"/>
+    </geometry>
+    <material name="blue"/>
+  </visual>
+  <inertial>
+    <mass value="1e-5"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+  </inertial>
+</link>
+
+<joint name="camera_joint" type="fixed">
+    <origin xyz="0.26 -0.025 0.135" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera"/>
+</joint>
+
+<link name="depth_camera">
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+  <box size="0.05 0.05 0.05"/>
+    </geometry>
+  </collision>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+  <box size="0.05 0.05 0.05"/>
+    </geometry>
+    <material name="red"/>
+  </visual>
+  <inertial>
+    <mass value="1e-5" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+  </inertial>
+</link>
+
+<joint name="depth_camera_joint" type="fixed">
+  <origin xyz="0.26 0.025 0.135" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="depth_camera"/>
+</joint>
+
+ 
+
+<!-- <link name="GPS__1">
+  <inertial>
+    <origin xyz="0.00011627637796780832 -0.002334634618793745 0.0027235072348321425" rpy="0 0 0"/>
+    <mass value="0.011550869015027797"/>
+    <inertia ixx="0.0" iyy="0.0" izz="1e-06" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.087 -0.0 -0.0065" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/GPS__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.087 -0.0 -0.0065" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mr_robot_description)/meshes/GPS__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link> -->
+
+<!-- <joint name="GPS_joint" type="fixed">
+  <origin xyz="0.087 0.0 0.0065" rpy="0 0 0"/>
+  <child link="GPS__1"/>
+  <parent link="base_link"/>
+</joint> -->
+
+
+
+</robot>
